@@ -27,18 +27,13 @@ namespace ThiTracNghiem
             txtTenDangNhap.GotFocus += TxtTenDangNhap_GotFocus;
             txtMatKhau.GotFocus += TxtTenDangNhap_GotFocus;
             llblDangKy.Click += LlblDangKy_Click;
-            //this.Paint += (s, e) =>
-            // {
-            //     Image img = ThiTracNghiem.Properties.Resources.hinh_nen_form_login;
-            //     e.Graphics.DrawImage(img, groupBox1.Bounds);
-            // };
-
+          
 
             txtMatKhau.TextChanged += (s, e) =>
             {
                 using (var qlttn = new QLTTNDataContext())
                 {
-                    nguoiDung = qlttn.NguoiDungs.Where(nd => nd.maND == txtTenDangNhap.Text && nd.MatKhau == txtMatKhau.Text).FirstOrDefault();
+                    nguoiDung = qlttn.NguoiDung.Where(nd => nd.maND == txtTenDangNhap.Text && nd.MatKhau == txtMatKhau.Text).FirstOrDefault();
                     if (nguoiDung != null)
                     {
                         frm = null;

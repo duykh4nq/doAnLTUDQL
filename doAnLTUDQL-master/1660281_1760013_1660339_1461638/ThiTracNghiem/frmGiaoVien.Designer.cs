@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtNgaySinhGV = new System.Windows.Forms.TextBox();
@@ -45,9 +45,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpQLCH = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.qlchBtnExport = new Guna.UI2.WinForms.Guna2Button();
+            this.QLCHBtnExportEX = new Guna.UI2.WinForms.Guna2Button();
             this.QLCHCbDsCH = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.qlchBtnImport = new Guna.UI2.WinForms.Guna2Button();
+            this.QLCHBtnImportEx = new Guna.UI2.WinForms.Guna2Button();
             this.QLCHCapDo = new Guna.UI2.WinForms.Guna2ComboBox();
             this.QLCHBtnSuaCH = new Guna.UI2.WinForms.Guna2Button();
             this.QLCHBtnXoaCH = new Guna.UI2.WinForms.Guna2Button();
@@ -303,9 +303,9 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.LightGray;
-            this.groupBox2.Controls.Add(this.qlchBtnExport);
+            this.groupBox2.Controls.Add(this.QLCHBtnExportEX);
             this.groupBox2.Controls.Add(this.QLCHCbDsCH);
-            this.groupBox2.Controls.Add(this.qlchBtnImport);
+            this.groupBox2.Controls.Add(this.QLCHBtnImportEx);
             this.groupBox2.Controls.Add(this.QLCHCapDo);
             this.groupBox2.Controls.Add(this.QLCHBtnSuaCH);
             this.groupBox2.Controls.Add(this.QLCHBtnXoaCH);
@@ -326,21 +326,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin câu hỏi";
             // 
-            // qlchBtnExport
+            // QLCHBtnExportEX
             // 
-            this.qlchBtnExport.BorderRadius = 20;
-            this.qlchBtnExport.CheckedState.Parent = this.qlchBtnExport;
-            this.qlchBtnExport.CustomImages.Parent = this.qlchBtnExport;
-            this.qlchBtnExport.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.qlchBtnExport.ForeColor = System.Drawing.Color.White;
-            this.qlchBtnExport.HoverState.Parent = this.qlchBtnExport;
-            this.qlchBtnExport.Location = new System.Drawing.Point(224, 348);
-            this.qlchBtnExport.Margin = new System.Windows.Forms.Padding(2);
-            this.qlchBtnExport.Name = "qlchBtnExport";
-            this.qlchBtnExport.ShadowDecoration.Parent = this.qlchBtnExport;
-            this.qlchBtnExport.Size = new System.Drawing.Size(106, 37);
-            this.qlchBtnExport.TabIndex = 45;
-            this.qlchBtnExport.Text = "Xuất excel";
+            this.QLCHBtnExportEX.BorderRadius = 20;
+            this.QLCHBtnExportEX.CheckedState.Parent = this.QLCHBtnExportEX;
+            this.QLCHBtnExportEX.CustomImages.Parent = this.QLCHBtnExportEX;
+            this.QLCHBtnExportEX.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.QLCHBtnExportEX.ForeColor = System.Drawing.Color.White;
+            this.QLCHBtnExportEX.HoverState.Parent = this.QLCHBtnExportEX;
+            this.QLCHBtnExportEX.Location = new System.Drawing.Point(224, 348);
+            this.QLCHBtnExportEX.Margin = new System.Windows.Forms.Padding(2);
+            this.QLCHBtnExportEX.Name = "QLCHBtnExportEX";
+            this.QLCHBtnExportEX.ShadowDecoration.Parent = this.QLCHBtnExportEX;
+            this.QLCHBtnExportEX.Size = new System.Drawing.Size(106, 37);
+            this.QLCHBtnExportEX.TabIndex = 45;
+            this.QLCHBtnExportEX.Text = "Xuất excel";
             // 
             // QLCHCbDsCH
             // 
@@ -362,22 +362,22 @@
             this.QLCHCbDsCH.Size = new System.Drawing.Size(373, 36);
             this.QLCHCbDsCH.TabIndex = 43;
             // 
-            // qlchBtnImport
+            // QLCHBtnImportEx
             // 
-            this.qlchBtnImport.BorderRadius = 20;
-            this.qlchBtnImport.CheckedState.Parent = this.qlchBtnImport;
-            this.qlchBtnImport.CustomImages.Parent = this.qlchBtnImport;
-            this.qlchBtnImport.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.qlchBtnImport.ForeColor = System.Drawing.Color.White;
-            this.qlchBtnImport.HoverState.Parent = this.qlchBtnImport;
-            this.qlchBtnImport.Location = new System.Drawing.Point(80, 347);
-            this.qlchBtnImport.Margin = new System.Windows.Forms.Padding(2);
-            this.qlchBtnImport.Name = "qlchBtnImport";
-            this.qlchBtnImport.ShadowDecoration.Parent = this.qlchBtnImport;
-            this.qlchBtnImport.Size = new System.Drawing.Size(106, 37);
-            this.qlchBtnImport.TabIndex = 44;
-            this.qlchBtnImport.Text = "Nhập từ excel";
-            this.qlchBtnImport.Click += new System.EventHandler(this.qlchBtnImport_Click);
+            this.QLCHBtnImportEx.BorderRadius = 20;
+            this.QLCHBtnImportEx.CheckedState.Parent = this.QLCHBtnImportEx;
+            this.QLCHBtnImportEx.CustomImages.Parent = this.QLCHBtnImportEx;
+            this.QLCHBtnImportEx.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.QLCHBtnImportEx.ForeColor = System.Drawing.Color.White;
+            this.QLCHBtnImportEx.HoverState.Parent = this.QLCHBtnImportEx;
+            this.QLCHBtnImportEx.Location = new System.Drawing.Point(80, 347);
+            this.QLCHBtnImportEx.Margin = new System.Windows.Forms.Padding(2);
+            this.QLCHBtnImportEx.Name = "QLCHBtnImportEx";
+            this.QLCHBtnImportEx.ShadowDecoration.Parent = this.QLCHBtnImportEx;
+            this.QLCHBtnImportEx.Size = new System.Drawing.Size(106, 37);
+            this.QLCHBtnImportEx.TabIndex = 44;
+            this.QLCHBtnImportEx.Text = "Nhập từ excel";
+            this.QLCHBtnImportEx.Click += new System.EventHandler(this.qlchBtnImport_Click);
             // 
             // QLCHCapDo
             // 
@@ -446,7 +446,7 @@
             this.QLCHBtnThemCH.Size = new System.Drawing.Size(92, 37);
             this.QLCHBtnThemCH.TabIndex = 39;
             this.QLCHBtnThemCH.Text = "Thêm";
-            this.QLCHBtnThemCH.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.QLCHBtnThemCH.Click += new System.EventHandler(this.QLCHBtnThemCH_Click);
             // 
             // QLCHDTSDCH
             // 
@@ -537,30 +537,30 @@
             // 
             // QLCHDgvDsDA
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            this.QLCHDgvDsDA.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.QLCHDgvDsDA.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.QLCHDgvDsDA.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.QLCHDgvDsDA.BackgroundColor = System.Drawing.Color.White;
             this.QLCHDgvDsDA.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.QLCHDgvDsDA.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.QLCHDgvDsDA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.QLCHDgvDsDA.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.QLCHDgvDsDA.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.QLCHDgvDsDA.ColumnHeadersHeight = 4;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.QLCHDgvDsDA.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.QLCHDgvDsDA.DefaultCellStyle = dataGridViewCellStyle6;
             this.QLCHDgvDsDA.EnableHeadersVisualStyles = false;
             this.QLCHDgvDsDA.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.QLCHDgvDsDA.Location = new System.Drawing.Point(15, 167);
@@ -1241,7 +1241,7 @@
             this.QLKTOTBtnSuaKT.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.QLKTOTBtnSuaKT.ForeColor = System.Drawing.Color.White;
             this.QLKTOTBtnSuaKT.HoverState.Parent = this.QLKTOTBtnSuaKT;
-            this.QLKTOTBtnSuaKT.Location = new System.Drawing.Point(187, 347);
+            this.QLKTOTBtnSuaKT.Location = new System.Drawing.Point(183, 347);
             this.QLKTOTBtnSuaKT.Margin = new System.Windows.Forms.Padding(2);
             this.QLKTOTBtnSuaKT.Name = "QLKTOTBtnSuaKT";
             this.QLKTOTBtnSuaKT.ShadowDecoration.Parent = this.QLKTOTBtnSuaKT;
@@ -1507,8 +1507,8 @@
         private Guna.UI2.WinForms.Guna2ComboBox QLCHCapDo;
         private Guna.UI2.WinForms.Guna2ComboBox QLCHCbDsCH;
         private Guna.UI2.WinForms.Guna2ComboBox QLCbKhoiLop;
-        private Guna.UI2.WinForms.Guna2Button qlchBtnExport;
-        private Guna.UI2.WinForms.Guna2Button qlchBtnImport;
+        private Guna.UI2.WinForms.Guna2Button QLCHBtnExportEX;
+        private Guna.UI2.WinForms.Guna2Button QLCHBtnImportEx;
         private Guna.UI2.WinForms.Guna2Button QLDTBtnRdCauHoiDT;
         private Guna.UI2.WinForms.Guna2TextBox QLDTTxtTenDT;
         private Guna.UI2.WinForms.Guna2Button QLDTBtnSuaDT;

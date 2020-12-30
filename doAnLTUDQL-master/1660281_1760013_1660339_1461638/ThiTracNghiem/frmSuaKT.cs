@@ -18,27 +18,13 @@ namespace ThiTracNghiem
         GiaoVien gv;
 
         int makt;
-        /// <summary>
-        /// buổi thi cần xóa hoặc cập nhật thông tin
-        /// </summary>
+       
         BuoiThi bt;
-
-        /// <summary>
-        /// đề thi trong buổi thi cần cập nhật
-        /// </summary>
         QLTTNDataContext.MyDeThi dt;
-
-        /// <summary>
-        /// danh sách học sinh có trong buổi thi
-        /// </summary>
         List<QLTTNDataContext.MyHocSinh> dshs;
-
         QLTTNDataContext qlttn = new QLTTNDataContext();
         KyThi ktccn;
 
-        /// <summary>
-        /// danh sách các mã học sinh được chọn
-        /// </summary>
         public List<string> dsMaHSDuocChon = new List<string>();
         public int madt = -1;
         public DialogResult dlresult;
@@ -50,31 +36,29 @@ namespace ThiTracNghiem
             this.maKhoi = maKhoi;
             this.makt = makt;
 
-            ktccn = qlttn.KyThis.Where(kt => kt.maKT == makt).FirstOrDefault();
-            bt = qlttn.BuoiThis.Where(bt => bt.maKT == makt && bt.DeThi.maMH == gv.maMH).FirstOrDefault();
+            ktccn = qlttn.KyThi.Where(kt => kt.maKT == makt).FirstOrDefault();
+            bt = qlttn.BuoiThi.Where(bt => bt.maKT == makt && bt.DeThi.maMH == gv.maMH).FirstOrDefault();
             if (bt != null)
             {
-                dshs = qlttn.BaiLams.Where(bl => bl.maKT == bt.maKT && bl.maDT == bt.maDT).
-                               Select(hs => new QLTTNDataContext.MyHocSinh
-                               {
-                                   maHS = hs.maHS,
-                                   HoTen = hs.HocSinh.HoTen,
-                                   maKhoi = hs.HocSinh.maKhoi,
-                                   maLop = hs.HocSinh.maLop,
-                                   NgaySinh = (DateTime)hs.HocSinh.NgaySinh
-                               }).
-                               ToList();
-                dt = qlttn.KyThis.Where(kt => kt.maKT == this.makt).FirstOrDefault()
-                                            .BuoiThis.Where(bt => bt.DeThi.maMH == gv.maMH)
-                                            .Select(bt => new QLTTNDataContext.MyDeThi
-                                            {
-                                                maDT = bt.maDT,
-                                                maGV = bt.DeThi.maGV,
-                                                maKhoi = bt.DeThi.maKhoi,
-                                                maMH = bt.DeThi.maMH,
-                                                TenDT = bt.DeThi.TenDT,
-                                                ThoiGianLamBai = (TimeSpan)bt.DeThi.ThoiGianLamBai
-                                            }).FirstOrDefault();
+                dshs = qlttn.BaiLam.Where(bl => bl.maKT == bt.maKT && bl.maDT == bt.maDT).
+                Select(hs => new QLTTNDataContext.MyHocSinh
+                {
+                    maHS = hs.maHS,
+                    HoTen = hs.HocSinh.HoTen,
+                    maKhoi = hs.HocSinh.maKhoi,
+                    maLop = hs.HocSinh.maLop,
+                    NgaySinh = (DateTime)hs.HocSinh.NgaySinh
+                }).
+                ToList();
+                dt = qlttn.KyThi.Where(kt => kt.maKT == this.makt).FirstOrDefault().BuoiThi.Where(bt => bt.DeThi.maMH == gv.maMH).Select(bt => new QLTTNDataContext.MyDeThi
+                {
+                    maDT = bt.maDT,
+                    maGV = bt.DeThi.maGV,
+                    maKhoi = bt.DeThi.maKhoi,
+                    maMH = bt.DeThi.maMH,
+                    TenDT = bt.DeThi.TenDT,
+                    ThoiGianLamBai = (TimeSpan)bt.DeThi.ThoiGianLamBai
+                }).FirstOrDefault();
             }
 
 
@@ -108,7 +92,6 @@ namespace ThiTracNghiem
                     return;
                 }
 
-                // sau cái vòng lặp này thì sẽ lấy ra được danh sách học sinh thi
                 foreach (DataGridViewRow row in dgvHS.Rows)
                 {
                     var cell = row.Cells["Chon"] as DataGridViewCheckBoxCell;
@@ -141,15 +124,15 @@ namespace ThiTracNghiem
 
                 try
                 {
-                    var ktccn = qlttn.KyThis.Where(kythi => kythi.maKT == makt).FirstOrDefault();
+                    var ktccn = qlttn.KyThi.Where(kythi => kythi.maKT == makt).FirstOrDefault();
                     ktccn.TenKT = txtTenKT.Text;
 
                     if (ktccn.LoaiKT == "ThiThiet")
                     {
                         if (bt != null)
                         {
-                            qlttn.BaiLams.DeleteAllOnSubmit(bt.BaiLams);
-                            qlttn.BuoiThis.DeleteOnSubmit(bt);
+                            qlttn.BaiLam.DeleteAllOnSubmit(bt.BaiLam);
+                            qlttn.BuoiThi.DeleteOnSubmit(bt);
                             qlttn.SubmitChanges();
                         }
                         bt = new BuoiThi
@@ -161,13 +144,11 @@ namespace ThiTracNghiem
 
                         if (dsMaDT.Count>0)
                         {
-                            // tạo buổi thi mới
-                            qlttn.BuoiThis.InsertOnSubmit(bt);
+                            qlttn.BuoiThi.InsertOnSubmit(bt);
 
-                            // thêm các thí sinh vào buổi thi mới này
                             foreach (var mahs in dsMaHSDuocChon)
                             {
-                                qlttn.BaiLams.InsertOnSubmit(new BaiLam
+                                qlttn.BaiLam.InsertOnSubmit(new BaiLam
                                 {
                                     maKT = ktccn.maKT,
                                     maDT = dsMaDT[0],
@@ -179,10 +160,10 @@ namespace ThiTracNghiem
                     }
                     else if (ktccn.LoaiKT == "ThiThu")
                     {
-                        foreach (var bt in ktccn.BuoiThis)
+                        foreach (var bt in ktccn.BuoiThi)
                         {
-                            qlttn.BaiLams.DeleteAllOnSubmit(bt.BaiLams);
-                            qlttn.BuoiThis.DeleteOnSubmit(bt);
+                            qlttn.BaiLam.DeleteAllOnSubmit(bt.BaiLam);
+                            qlttn.BuoiThi.DeleteOnSubmit(bt);
                             qlttn.SubmitChanges();
                         }
 
@@ -194,12 +175,12 @@ namespace ThiTracNghiem
                                 maDT = madt,
                                 NgayGioThi = dtpNgayThi.Value
                             };
-                            qlttn.BuoiThis.InsertOnSubmit(bt);
+                            qlttn.BuoiThi.InsertOnSubmit(bt);
                             qlttn.SubmitChanges();
 
                             foreach (var hs in dshs)
                             {
-                                qlttn.BaiLams.InsertOnSubmit(new BaiLam
+                                qlttn.BaiLam.InsertOnSubmit(new BaiLam
                                 {
                                     maHS = hs.maHS,
                                     maDT = bt.maDT,
@@ -211,7 +192,7 @@ namespace ThiTracNghiem
                     }
 
                     qlttn.SubmitChanges();
-                    frmgv.loadQlkttotDgvKyThi();
+                    frmgv.LoadQLKTOnThiKyThi();
                     MessageBox.Show("Cập nhật thành công", "Thông báo");
                     this.Close();
 
@@ -236,14 +217,14 @@ namespace ThiTracNghiem
 
             using (var qlttn = new QLTTNDataContext())
             {
-                var ktCanCapNhat = qlttn.KyThis.Where(kt => kt.maKT == makt).FirstOrDefault();
+                var ktCanCapNhat = qlttn.KyThi.Where(kt => kt.maKT == makt).FirstOrDefault();
                 txtTenKT.Text = ktCanCapNhat.TenKT;
-                var buoiThiCanCapNhat = ktCanCapNhat.BuoiThis.Where(bt => bt.DeThi.maMH == gv.maMH).FirstOrDefault();
+                var buoiThiCanCapNhat = ktCanCapNhat.BuoiThi.Where(bt => bt.DeThi.maMH == gv.maMH).FirstOrDefault();
                 if (buoiThiCanCapNhat != null)
                 {
                     dtpNgayThi.Value = (DateTime)buoiThiCanCapNhat.NgayGioThi;
                 }
-                lblTgBatDau.Text = $"Thời gian bắt đầu môn {qlttn.MonHocs.Where(mh => mh.maMH == gv.maMH).FirstOrDefault().tenMH}: ";
+                lblTgBatDau.Text = $"Thời gian bắt đầu môn {qlttn.MonHoc.Where(mh => mh.maMH == gv.maMH).FirstOrDefault().tenMH}: ";
             }
 
             dgvHS.Columns.Add(new DataGridViewCheckBoxColumn()
@@ -339,9 +320,7 @@ namespace ThiTracNghiem
             return soDong;
         }
 
-        /// <summary>
-        /// lấy tất cả những học sinh rảnh ngoài khoảng ghời gian
-        /// </summary>
+     
         private void loadQlktDgvHocSinh()
         {
             DateTime thoiGianBatDau = dtpNgayThi.Value;
@@ -353,7 +332,7 @@ namespace ThiTracNghiem
                 thoiGianThi = (TimeSpan)dtDuocChon.ThoiGianLamBai;
             }
 
-            if (qlttn.HocSinhs.Count() == 0)
+            if (qlttn.HocSinh.Count() == 0)
             {
                 MessageBox.Show("Không có dữ liệu học sinh", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -363,20 +342,15 @@ namespace ThiTracNghiem
                 if (bt != null)
                 {
                     // lấy những học sinh rảnh trong thời gian định cho thi và thí sinh có tên sẵn trong kỳ thi đó
-                    var dshsRanh = qlttn.HocSinhs.Where(hs => hs.maKhoi == maKhoi &&
-                                            hs.BaiLams.Where(bl => bl.BuoiThi.NgayGioThi > thoiGianBatDau + thoiGianThi
-                                                                    || bl.BuoiThi.NgayGioThi + bl.BuoiThi.DeThi.ThoiGianLamBai < thoiGianBatDau
-                                                               ).Count() == hs.BaiLams.Count
-                                                               && hs.BaiLams.Any(bl => bt.BaiLams.Contains(bl)) == false
-                                                        )
-                                     .Select(hs => new QLTTNDataContext.MyHocSinh
-                                     {
-                                         maHS = hs.maHS,
-                                         HoTen = hs.HoTen,
-                                         maKhoi = hs.maKhoi,
-                                         maLop = hs.maLop,
-                                         NgaySinh = (DateTime)hs.NgaySinh
-                                     }).ToList();
+                    var dshsRanh = qlttn.HocSinh.Where(hs => hs.maKhoi == maKhoi && hs.BaiLam.Where(bl => bl.BuoiThi.NgayGioThi > thoiGianBatDau + thoiGianThi|| bl.BuoiThi.NgayGioThi + bl.BuoiThi.DeThi.ThoiGianLamBai < thoiGianBatDau).Count() == hs.BaiLam.Count&& hs.BaiLam.Any(bl => bt.BaiLam.Contains(bl)) == false)
+                    .Select(hs => new QLTTNDataContext.MyHocSinh
+                    {
+                        maHS = hs.maHS,
+                        HoTen = hs.HoTen,
+                        maKhoi = hs.maKhoi,
+                        maLop = hs.maLop,
+                        NgaySinh = (DateTime)hs.NgaySinh
+                    }).ToList();
                     if (dshs != null)
                     {
                         dshsRanh.InsertRange(0, dshs);
@@ -385,20 +359,16 @@ namespace ThiTracNghiem
                 }
                 else
                 {
-                    // lấy những học sinh rảnh trong thời gian định cho thi và thí sinh có tên sẵn trong kỳ thi đó
-                    var dshsRanh = qlttn.HocSinhs.Where(hs => hs.maKhoi == maKhoi &&
-                                            hs.BaiLams.Where(bl => bl.BuoiThi.NgayGioThi > thoiGianBatDau + thoiGianThi
-                                                                    || bl.BuoiThi.NgayGioThi + bl.BuoiThi.DeThi.ThoiGianLamBai < thoiGianBatDau
-                                                               ).Count() == hs.BaiLams.Count
-                                                        )
-                                     .Select(hs => new QLTTNDataContext.MyHocSinh
-                                     {
-                                         maHS = hs.maHS,
-                                         HoTen = hs.HoTen,
-                                         maKhoi = hs.maKhoi,
-                                         maLop = hs.maLop,
-                                         NgaySinh = (DateTime)hs.NgaySinh
-                                     }).ToList();
+                    var dshsRanh = qlttn.HocSinh.Where(hs => hs.maKhoi == maKhoi &&hs.BaiLam.Where(bl => bl.BuoiThi.NgayGioThi > thoiGianBatDau + thoiGianThi|| bl.BuoiThi.NgayGioThi + bl.BuoiThi.DeThi.ThoiGianLamBai < thoiGianBatDau).Count() == hs.BaiLam.Count
+                                       )
+                    .Select(hs => new QLTTNDataContext.MyHocSinh
+                    {
+                        maHS = hs.maHS,
+                        HoTen = hs.HoTen,
+                        maKhoi = hs.maKhoi,
+                        maLop = hs.maLop,
+                        NgaySinh = (DateTime)hs.NgaySinh
+                    }).ToList();
                     if (dshs != null)
                     {
                         dshsRanh.InsertRange(0, dshs);
@@ -442,17 +412,17 @@ namespace ThiTracNghiem
             else
             {
                 MessageBox.Show($"Hiện tất cả các học sinh của khối <{maKhoi}> đều đang bận thi" +
-                                $"{Environment.NewLine}Vui lòng chọn thời gian khác để tạo buổi thi",
-                                "Thông báo",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                $"{Environment.NewLine}Vui lòng chọn thời gian khác để tạo buổi thi",
+                "Thông báo",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
             }
         }
         private void loadQlktDgvDeThi()
         {
             using (var qlttn = new QLTTNDataContext())
             {
-                if (qlttn.DeThis.Count() == 0)
+                if (qlttn.DeThi.Count() == 0)
                 {
                     MessageBox.Show("Không có dữ liệu đề thi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -460,17 +430,17 @@ namespace ThiTracNghiem
 
                 try
                 {
-                    bsLichThi.DataSource = qlttn.DeThis.Where(dt => dt.maMH == gv.maMH && dt.maKhoi == maKhoi)
-                                                       .Select(dt => new QLTTNDataContext.MyDeThi
-                                                       {
-                                                           maDT = dt.maDT,
-                                                           TenDT = dt.TenDT,
-                                                           maMH = dt.maMH,
-                                                           maGV = dt.maGV,
-                                                           TenMH = dt.MonHoc.tenMH,
-                                                           maKhoi = dt.maKhoi,
-                                                           ThoiGianLamBai = (TimeSpan)dt.ThoiGianLamBai
-                                                       });
+                    bsLichThi.DataSource = qlttn.DeThi.Where(dt => dt.maMH == gv.maMH && dt.maKhoi == maKhoi)
+                    .Select(dt => new QLTTNDataContext.MyDeThi
+                    {
+                        maDT = dt.maDT,
+                        TenDT = dt.TenDT,
+                        maMH = dt.maMH,
+                        maGV = dt.maGV,
+                        TenMH = dt.MonHoc.tenMH,
+                        maKhoi = dt.maKhoi,
+                        ThoiGianLamBai = (TimeSpan)dt.ThoiGianLamBai
+                    });
 
                     if (bsLichThi.Count > 0)
                     {
@@ -491,8 +461,6 @@ namespace ThiTracNghiem
                     }
 
 
-                    /// những dòng sau dùng để check cái đề thi mà có trong kỳ thi cần cập nhật
-                    /// mã đề thi (của bộ môn mà giáo viên đó đảm nhiệm) trong kỳ thi muốn cập nhật
                     if (ktccn.LoaiKT == "ThiThiet")
                     {
                         if (dt != null)
@@ -514,7 +482,7 @@ namespace ThiTracNghiem
                         foreach (DataGridViewRow row in dgvDT.Rows)
                         {
                             var madt = int.Parse(row.Cells["maDT"].Value.ToString());
-                            if (ktccn.BuoiThis.Where(bt => bt.maDT == madt).Count() > 0)
+                            if (ktccn.BuoiThi.Where(bt => bt.maDT == madt).Count() > 0)
                             {
                                 var cell = row.Cells["Chon"] as DataGridViewCheckBoxCell;
                                 cell.Value = cell.TrueValue;
@@ -531,10 +499,7 @@ namespace ThiTracNghiem
             }
         }
 
-        /// <summary>
-        /// lấy đề thi được chọn trong dgvDeThi
-        /// </summary>
-        /// <returns></returns>
+        
         private QLTTNDataContext.MyDeThi getDeThiDuocChon()
         {
             QLTTNDataContext.MyDeThi dt = null;
@@ -564,7 +529,6 @@ namespace ThiTracNghiem
             {
                 return;
             }
-            // nếu lớn hơn thì check hết
             if (soDongMuonCheck > dgv.RowCount)
             {
                 foreach (DataGridViewRow row in dgv.Rows)

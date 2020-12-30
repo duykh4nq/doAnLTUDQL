@@ -1118,7 +1118,6 @@ namespace ThiTracNghiem
                 {
                     var makt = int.Parse(QLKTOTDgvKTOT.Rows[e.RowIndex].Cells["maKT"].Value.ToString());
                     var QLTTN = new QLTTNDataContext();
-                    
                     KyThi ktDuocChon = QLTTN.KyThi.Where(kt => kt.maKT == makt).FirstOrDefault();
 
                     if (ktDuocChon.BuoiThi.Where(buoithi => buoithi.NgayGioThi < DateTime.Now).Count() > 0)
@@ -1466,7 +1465,7 @@ namespace ThiTracNghiem
             QLCHBtnThemCH.Click += (s, e) =>
             {
                 var QLTTN = new QLTTNDataContext();
-                
+
                 if (string.IsNullOrWhiteSpace(QLCHTxtCauHoi.Text))
                 {
                     MessageBox.Show("Bạn cần phải nhập nội dung cho câu hỏi", "Hướng dẫn", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1477,12 +1476,9 @@ namespace ThiTracNghiem
                     MessageBox.Show("Câu hỏi này đã có trong danh sách. Xin mời tạo câu hỏi mới", "Trùng record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                var cauhoi = QLTTN.CauHoi.Where(ch => ch.DapAn == null || ch.DapAn.Count < 2).FirstOrDefault();
-                if (cauhoi != null)
-                {
-                    MessageBox.Show($"Xin mời nhập tối thiểu 2 đáp án cho câu hỏi sau trước khi thêm câu hỏi mới:{Environment.NewLine} <{cauhoi.NoiDung}>", "Câu hỏi chưa có đáp án", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    return;
-                }
+
+
+
                 QLTTN.CauHoi.InsertOnSubmit(new CauHoi()
                 {
                     NoiDung = QLCHTxtCauHoi.Text,
@@ -1495,8 +1491,8 @@ namespace ThiTracNghiem
                 QLCHCbDsCH.SelectedItem = QLCHCbDsCH.Items[QLCHCbDsCH.Items.Count - 1];
                 QLCHTxtDapAn.Focus();
             };
-            
-            
+
+
             QLCHBtnThemDA.Click += (s, e) =>
             {
                 if (QLCHCbDsCH.SelectedValue == null)
@@ -1579,7 +1575,7 @@ namespace ThiTracNghiem
                 LoadQlCHDapAn();
                 QLCHTxtDapAn.Focus();
             };
-            qlchBtnImport.Click += (s, e) =>
+            QLCHBtnImportEx.Click += (s, e) =>
             {
                 using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx|Excel Workbook 97-2003|*.xls", ValidateNames = true })
                 {
@@ -1715,7 +1711,7 @@ namespace ThiTracNghiem
                 }
 
             };
-            qlchBtnExport.Click += (s, e) =>
+            QLCHBtnExportEX.Click += (s, e) =>
             {
                 using (var sfd = new SaveFileDialog()
                 {
@@ -1783,7 +1779,7 @@ namespace ThiTracNghiem
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void qlchDgvDsda_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -1850,7 +1846,15 @@ namespace ThiTracNghiem
 
         private void dgvDsda_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            
 
         }
+
+        //private void QLCHBtnThemCH_Click(object sender, EventArgs e)
+        //{
+        //    //MessageBox.Show("đang test ", "Trùng record", MessageBoxButtons.OK);
+
+            
+        //}
     }
 }
